@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Nurul Ain Academic Tuition | Science, Maths, Biology, Chemistry & Healthcare</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Chosen Palette: Slate Neutral with Medical Deep Teal and Gold Accents -->
+    <!-- Application Structure Plan:
+        1. Navigation Header: Brand logo, direct navigation links, phone numbers, and WhatsApp quick CTA.
+        2. Hero Section: Highlights Ph.D. credentials, Gold Medalist status, current job as Lecturer at Asian Metropolitan University (AMU), and core subject offerings in English.
+        3. Educator Profile & Teaching Focus Radar: Chart.js visualization showcasing teaching expertise across core natural sciences, biology, chemistry, and health sciences.
+        4. Interactive Program Explorer: Filterable subject cards (School, Foundation in Science, Degree & Healthcare) with selection trigger.
+        5. Interactive Fee Calculator: Real-time price estimator supporting Online Class or Physical Class at Tutor's House in Kuala Lumpur (KL).
+        6. Learning Mode Breakdown: Detailed breakdown for Online vs Tutor's House in Kuala Lumpur (Student comes to Tutor's House).
+        7. Registration Form: Directly generates a pre-formatted WhatsApp message sent to Dr. Nurul Ain.
+    -->
+    <!-- Visualization & Content Choices:
+        - Teaching Domain Expertise: Chart.js Radar Chart visualizing proficiency across science and medical healthcare disciplines.
+        - Interactive Fee Calculator: Dynamic state-based estimation reflecting student levels and study modes.
+        - Program Card Filtering: Dynamic category toggling via vanilla JavaScript.
+        - NO SVG used (Unicode characters and styled HTML elements used instead).
+        - NO Mermaid JS used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🎓</span>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-base md:text-lg leading-tight">DR. NURUL AIN</h1>
+                    <p class="text-xs text-teal-700 font-medium">Science, Maths, Biology, Chemistry & Healthcare Tuition</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="#profile" class="hover:text-teal-700 transition">Profile & Expertise</a>
+                <a href="#programs" class="hover:text-teal-700 transition">Programs</a>
+                <a href="#calculator" class="hover:text-teal-700 transition">Fee Calculator</a>
+                <a href="#modes" class="hover:text-teal-700 transition">Learning Modes</a>
+            </nav>
+            <div>
+                <a href="https://wa.me/60125219701?text=Hello%20Dr.%20Nurul%20Ain,%20I%20am%20interested%20in%20enquiring%20about%20your%20tuition%20classes." 
+                   target="_blank" 
+                   class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg shadow-sm transition">
+                    <span>💬 WhatsApp Us</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-b from-teal-900 via-slate-900 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-semibold px-3 py-1.5 rounded-full">
+                        <span>🏆 Ph.D. Medical Education (UPM) • Gold Medalist (CGPA 4.00)</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                        Academic Mastery in <span class="text-teal-400">Science, Mathematics, Biology, Chemistry</span> & <span class="text-amber-400">Health Sciences</span>
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Join exclusive tuition sessions delivered directly by a <strong>Lecturer at Asian Metropolitan University (AMU)</strong> holding a Ph.D. in Medical Education. Available via <strong>Online Classes (Nationwide)</strong> or <strong>Physical Classes (At Tutor's House in Kuala Lumpur)</strong>.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="#calculator" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm transition shadow-lg">
+                            🧮 Estimate Fee Monthly
+                        </a>
+                        <a href="#programs" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-5 py-3 rounded-xl border border-slate-700 text-sm transition">
+                            📚 Explore Programs
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800 text-center md:text-left">
+                        <div>
+                            <div class="text-xl md:text-2xl font-extrabold text-amber-400">CGPA 4.00</div>
+                            <div class="text-xs text-slate-400">Ph.D. Med Ed (UPM)</div>
+                        </div>
+                        <div>
+                            <div class="text-xl md:text-2xl font-extrabold text-teal-400">Lecturer AMU</div>
+                            <div class="text-xs text-slate-400">Asian Metropolitan University</div>
+                        </div>
+                        <div>
+                            <div class="text-xl md:text-2xl font-extrabold text-sky-400">KL / Online</div>
+                            <div class="text-xs text-slate-400">Flexible Learning Modes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Educator Quick Profile Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 shadow-2xl backdrop-blur-md">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-16 h-16 rounded-full bg-teal-600 flex items-center justify-center text-3xl shadow-inner font-bold text-white border-2 border-amber-400">
+                                👩‍🏫
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Dr. Nurul Ain Salim</h3>
+                                <p class="text-xs text-teal-300 font-semibold">Lecturer, Asian Metropolitan University (AMU)</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Ph.D. Med Ed (UPM) | M.Sc. Biomedicine | B.Sc. Med Sciences</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2.5 text-xs text-slate-300 bg-slate-900/60 p-4 rounded-xl border border-slate-700/50">
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-400">Current Designation:</span>
+                                <span class="font-semibold text-amber-300">Lecturer at AMU</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-400">Contact Numbers:</span>
+                                <span class="font-semibold text-emerald-300">012-521 9701 / 019-561 2689</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-400">Physical Venue:</span>
+                                <span class="font-semibold text-slate-200">Tutor's House (Kuala Lumpur)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-400">Online Venue:</span>
+                                <span class="font-semibold text-emerald-400">All Over Malaysia & Worldwide</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-400">Target Students:</span>
+                                <span class="font-semibold text-teal-300">School, Foundation & University</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <a href="#registration" class="block w-full text-center bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 rounded-lg text-xs transition">
+                                📝 Book WhatsApp Consultation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Profile & Teaching Expertise -->
+        <section id="profile" class="py-12 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Why Learn With Dr. Nurul Ain?</h2>
+                    <p class="text-slate-600 text-sm mt-2">
+                        High-quality education stems from solid academic foundations, active university teaching experience, and deep domain knowledge in medical and natural sciences.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Text Credentials -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                                <div class="text-amber-600 font-bold text-lg mb-1">🎓 Ph.D. CGPA 4.00 (UPM)</div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Recipient of the Gold Medal Award (I-PICTL & CK-INOVASI) with a perfect 4.00 CGPA in Medical Education from UPM. Employs scientifically proven teaching methodologies.
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                                <div class="text-teal-600 font-bold text-lg mb-1">👩‍🏫 University Lecturer</div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Currently serving as a University Lecturer at Asian Metropolitan University (AMU), bringing active academic standard practices directly to student tutoring.
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                                <div class="text-sky-600 font-bold text-lg mb-1">🧬 Science & Health Specialist</div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Specialized in Primary/Secondary Science, Mathematics, Biology, Chemistry, Anatomy, Physiology, Pharmacology, and Medical Health Sciences.
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                                <div class="text-indigo-600 font-bold text-lg mb-1">🏠 KL Physical Location</div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Provides a comfortable, dedicated, and focused learning space at the tutor's house located in Kuala Lumpur for face-to-face sessions (student travels to venue).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Academic Qualifications List -->
+                        <div class="p-4 bg-teal-50 border border-teal-100 rounded-xl">
+                            <h4 class="font-bold text-teal-900 text-xs uppercase tracking-wider mb-2">Accredited Academic Qualifications:</h4>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-2.5 py-1 bg-white border border-teal-200 rounded-md font-semibold text-teal-800">Ph.D. Med Ed (UPM)</span>
+                                <span class="px-2.5 py-1 bg-white border border-teal-200 rounded-md font-semibold text-teal-800">M.Sc. Biomedicine (MSU)</span>
+                                <span class="px-2.5 py-1 bg-white border border-teal-200 rounded-md font-semibold text-teal-800">B.Sc. Medical Sciences (MSU)</span>
+                                <span class="px-2.5 py-1 bg-white border border-teal-200 rounded-md font-semibold text-teal-800">Dip. Pharmacy (UniKL RCMP)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 text-center">Teaching Domain Competency Focus</h4>
+                        <div class="chart-container">
+                            <canvas id="expertiseChart"></canvas>
+                        </div>
+                        <p class="text-[11px] text-slate-500 text-center mt-2">
+                            *Emphasizes conceptual understanding, exam techniques, and core scientific principles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Programs & Subject Explorer -->
+        <section id="programs" class="py-12 bg-slate-50 border-b border-slate-200 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Offered Programs & Subjects</h2>
+                    <p class="text-slate-600 text-sm mt-2">
+                        Select your academic level below to explore specialized tuition programs available for school and university levels.
+                    </p>
+                </div>
+
+                <!-- Level Filters -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8 overflow-x-auto py-2">
+                    <button onclick="filterProgram('all')" id="btn-all" class="prog-btn active px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-teal-700 text-white shadow-sm">
+                        🌐 All Academic Levels
+                    </button>
+                    <button onclick="filterProgram('school')" id="btn-school" class="prog-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100">
+                        🏫 Primary & Secondary School
+                    </button>
+                    <button onclick="filterProgram('asasi')" id="btn-asasi" class="prog-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100">
+                        🎓 Foundation in Science
+                    </button>
+                    <button onclick="filterProgram('degree')" id="btn-degree" class="prog-btn px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100">
+                        🔬 Diploma / Degree Healthcare
+                    </button>
+                </div>
+
+                <!-- Program Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="program-cards">
+
+                    <!-- Card 1: Primary & Lower Secondary Science & Maths -->
+                    <div class="prog-card school bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-3xl">🧪</span>
+                            <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Primary & Secondary</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Science & Mathematics</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Building strong core understanding in scientific concepts, problem-solving skills, and mathematical calculations for school levels.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs">
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Primary / Secondary School Science</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Core Mathematics</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Answering Techniques & Exam Drills</span></div>
+                        </div>
+                        <button onclick="selectForBooking('Science & Mathematics (School Level)')" class="w-full text-center bg-slate-100 hover:bg-teal-50 text-teal-800 font-bold py-2 rounded-lg text-xs transition border border-teal-200">
+                            Select This Subject
+                        </button>
+                    </div>
+
+                    <!-- Card 2: High School Pure Sciences (Biology & Chemistry) -->
+                    <div class="prog-card school bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-3xl">🧬</span>
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Upper Secondary (SPM/IGCSE)</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Biology & Chemistry</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            In-depth guidance for Pure Sciences (Forms 4 & 5 / IGCSE) to master biological processes, chemical equations, experiments, and exam answering strategies.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs">
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Biology (Pure Science)</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Chemistry (Pure Science)</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Terminologies & Experiment Mastery</span></div>
+                        </div>
+                        <button onclick="selectForBooking('Biology & Chemistry (Upper Secondary)')" class="w-full text-center bg-slate-100 hover:bg-teal-50 text-teal-800 font-bold py-2 rounded-lg text-xs transition border border-teal-200">
+                            Select This Subject
+                        </button>
+                    </div>
+
+                    <!-- Card 3: Foundation in Science -->
+                    <div class="prog-card asasi bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-3xl">🩺</span>
+                            <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Pre-University / College</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Foundation in Science / Asasi</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Critical academic coaching for college students enrolled in Foundation in Science / Matriculation pursuing future degrees in Medicine & Health Sciences.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs">
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Foundation Biology</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Foundation Chemistry</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Introduction to Life & Medical Sciences</span></div>
+                        </div>
+                        <button onclick="selectForBooking('Foundation in Science / Asasi')" class="w-full text-center bg-slate-100 hover:bg-teal-50 text-teal-800 font-bold py-2 rounded-lg text-xs transition border border-teal-200">
+                            Select This Subject
+                        </button>
+                    </div>
+
+                    <!-- Card 4: Medical Healthcare & Health Sciences Degree/Diploma -->
+                    <div class="prog-card degree bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-3xl">🩻</span>
+                            <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Diploma / Degree University</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Medical Healthcare & Health Sciences</h3>
+                        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                            Specialized academic tutoring for tertiary students pursuing diplomas or degrees in Medical Sciences, Biomedicine, Pharmacy, Nursing, and Health Sciences.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs">
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Human Anatomy & Physiology</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Pharmacology, Biomedicine & Microbiology</span></div>
+                            <div class="flex items-center text-slate-700">📌 <span class="ml-2 font-medium">Core Medical & Healthcare Subjects</span></div>
+                        </div>
+                        <button onclick="selectForBooking('Medical Healthcare & Health Sciences')" class="w-full text-center bg-slate-100 hover:bg-teal-50 text-teal-800 font-bold py-2 rounded-lg text-xs transition border border-teal-200">
+                            Select This Subject
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Fee Calculator -->
+        <section id="calculator" class="py-12 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">🧮 Interactive Fee Estimator</h2>
+                    <p class="text-slate-600 text-sm mt-2">
+                        Configure your academic level, preferred class mode, and weekly hours to calculate an estimated monthly fee.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <!-- Controls -->
+                    <div class="md:col-span-7 space-y-5">
+                        
+                        <!-- Academic Level -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Academic Level</label>
+                            <select id="calc-level" onchange="calculateFee()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs md:text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="school_primary">Primary School (Science / Mathematics)</option>
+                                <option value="school_secondary" selected>Secondary School (Science, Maths, Biology, Chemistry)</option>
+                                <option value="asasi">Foundation in Science / Pre-University</option>
+                                <option value="degree">Diploma / Degree Medical Healthcare & Health Sciences</option>
+                            </select>
+                        </div>
+
+                        <!-- Class Mode -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">2. Learning Mode</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer border border-slate-300 bg-white rounded-xl p-3 flex items-center space-x-2 text-xs font-medium hover:border-teal-500 transition">
+                                    <input type="radio" name="calc-mode" value="online" checked onchange="calculateFee()" class="text-teal-600 focus:ring-teal-500">
+                                    <span>💻 Online Class (Worldwide)</span>
+                                </label>
+                                <label class="cursor-pointer border border-slate-300 bg-white rounded-xl p-3 flex items-center space-x-2 text-xs font-medium hover:border-teal-500 transition">
+                                    <input type="radio" name="calc-mode" value="home" onchange="calculateFee()" class="text-teal-600 focus:ring-teal-500">
+                                    <span>🏠 Tutor's House (Kuala Lumpur)</span>
+                                </label>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1.5 italic">
+                                *Note: For physical classes, students travel directly to the tutor's house located in Kuala Lumpur.
+                            </p>
+                        </div>
+
+                        <!-- Hours per week -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                                3. Duration: <span id="hours-display" class="text-teal-700 font-bold">2 Hours / Week</span>
+                            </label>
+                            <input type="range" id="calc-hours" min="1" max="6" value="2" step="1" oninput="calculateFee()" class="w-full accent-teal-600">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-medium">
+                                <span>1 Hr/Wk</span>
+                                <span>2 Hrs/Wk</span>
+                                <span>4 Hrs/Wk</span>
+                                <span>6 Hrs/Wk</span>
+                            </div>
+                        </div>
+
+                        <!-- Session Type -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">4. Session Format</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer border border-slate-300 bg-white rounded-xl p-3 flex items-center space-x-2 text-xs font-medium hover:border-teal-500 transition">
+                                    <input type="radio" name="calc-type" value="personal" checked onchange="calculateFee()" class="text-teal-600 focus:ring-teal-500">
+                                    <span>👤 Individual (1-to-1)</span>
+                                </label>
+                                <label class="cursor-pointer border border-slate-300 bg-white rounded-xl p-3 flex items-center space-x-2 text-xs font-medium hover:border-teal-500 transition">
+                                    <input type="radio" name="calc-type" value="group" onchange="calculateFee()" class="text-teal-600 focus:ring-teal-500">
+                                    <span>👥 Small Group (2-3 Students)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="md:col-span-5 bg-gradient-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-6 flex flex-col justify-between shadow-md">
+                        <div>
+                            <div class="text-xs text-amber-400 font-bold uppercase tracking-wider mb-2">Estimated Package Summary</div>
+                            <div class="text-3xl font-extrabold text-white mb-1">
+                                RM <span id="fee-amount">--</span> <span class="text-xs font-normal text-slate-300">/ month</span>
+                            </div>
+                            <p class="text-[11px] text-slate-300 mb-6 border-b border-slate-700/80 pb-4">
+                                Calculated for 4 weeks of learning per month (includes customized learning materials & notes).
+                            </p>
+
+                            <div class="space-y-2 text-xs text-slate-300">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Level:</span>
+                                    <span id="summary-level" class="font-semibold text-slate-100">Secondary School</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Mode:</span>
+                                    <span id="summary-mode" class="font-semibold text-emerald-400">💻 Online Class</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Frequency:</span>
+                                    <span id="summary-hours" class="font-semibold text-slate-100">2 Hours / Week</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Format:</span>
+                                    <span id="summary-type" class="font-semibold text-amber-300">1-to-1 Individual</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-800">
+                            <button onclick="sendCalculatedWhatsApp()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs transition shadow-md flex items-center justify-center space-x-2">
+                                <span>📲 Request Schedule via WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Learning Modes Breakdown -->
+        <section id="modes" class="py-12 bg-slate-50 border-b border-slate-200 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Flexible Learning Modes</h2>
+                    <p class="text-slate-600 text-sm mt-2">
+                        Choose the mode that best fits your geographic location and learning preference.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Mode 1: Online -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-teal-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Nationwide & Global</div>
+                        <div class="text-3xl mb-3">🖥️</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Interactive Online Classes</h3>
+                        <p class="text-xs text-slate-600 mb-4">
+                            Ideal for students anywhere across Malaysia or abroad seeking live interactive digital tutoring sessions.
+                        </p>
+                        <ul class="space-y-2 text-xs text-slate-700 mb-6">
+                            <li class="flex items-start">✅ <span class="ml-2">Live Google Meet or Zoom sessions with HD screen presentations.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Digital notes, step-by-step problem-solving, and PDF exercises provided.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Flexible scheduling arranged upon mutual agreement.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Attend conveniently from the comfort of your home.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Mode 2: Tutor's House in KL -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden border-teal-300">
+                        <div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase">Kuala Lumpur Only</div>
+                        <div class="text-3xl mb-3">🏠</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Physical Class at Tutor's House (KL)</h3>
+                        <p class="text-xs text-slate-600 mb-4">
+                            Exclusively for students based in **Kuala Lumpur (KL)** who prefer face-to-face in-person tutoring.
+                        </p>
+                        <ul class="space-y-2 text-xs text-slate-700 mb-6">
+                            <li class="flex items-start">✅ <span class="ml-2">Students **travel directly to the tutor's home** in Kuala Lumpur.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Focused, quiet, and quiet learning environment for maximum concentration.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Direct physical exercise marking and immediate face-to-face feedback.</span></li>
+                            <li class="flex items-start">✅ <span class="ml-2">Highly recommended for deep complex topics in Biology, Chemistry & Medical Sciences.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Direct Enquiry / WhatsApp Registration -->
+        <section id="registration" class="py-12 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto bg-slate-900 text-white rounded-3xl p-6 md:p-10 shadow-xl border border-slate-800">
+                <div class="text-center mb-8">
+                    <span class="text-3xl">📝</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-2">Enquiry & Student Registration</h2>
+                    <p class="text-slate-400 text-xs md:text-sm mt-1">
+                        Please fill in the form below. Submitting this form will construct a formatted WhatsApp message to Dr. Nurul Ain.
+                    </p>
+                </div>
+
+                <form id="regForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Student / Parent Full Name</label>
+                        <input type="text" id="form-name" required placeholder="e.g. Mrs. Sarah / Ahmad" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Academic Level / Grade</label>
+                            <input type="text" id="form-grade" required placeholder="e.g. Form 5 SPM / Foundation in Science / Degree Healthcare" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Preferred Class Mode</label>
+                            <select id="form-mode" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option value="Online Class (Worldwide)">Online Class (Live Digital)</option>
+                                <option value="Physical Class (At Tutor's House in KL)">Physical Class (At Tutor's House in KL)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Subject(s) Required</label>
+                        <input type="text" id="form-subject" required placeholder="e.g. Science / Mathematics / Biology / Chemistry / Healthcare" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Additional Notes / Time Preferences</label>
+                        <textarea id="form-notes" rows="3" placeholder="Specify any specific topics or preferred time slots..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl text-xs md:text-sm transition shadow-lg flex items-center justify-center space-x-2">
+                        <span>📲 Send Registration via WhatsApp</span>
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center text-[11px] text-slate-400">
+                    🔒 Your information is confidential and will be used strictly for academic registration purposes.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <div class="font-bold text-slate-200">Dr. Nurul Ain Academic Tuition & Guidance</div>
+                <div class="text-[11px] text-slate-500">Lecturer, Asian Metropolitan University (AMU) | Specialist in Science, Maths, Biology, Chemistry & Healthcare</div>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-4 text-[11px]">
+                <span>📍 Kuala Lumpur (Tutor's House)</span>
+                <span>📞 +60 12-521 9701 / +60 19-561 2689</span>
+                <span>✉️ nurulainmohdsalim2689@gmail.com</span>
+            </div>
+            <div class="text-[10px] text-slate-600">
+                &copy; 2026 Dr. Nurul Ain Salim. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Chart.js Implementation for Teaching Domain Radar Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('expertiseChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Science & Problem Solving', 
+                        'Anatomy & Physiology', 
+                        'Biology (Pure Science)', 
+                        'Chemistry (Pure Science)', 
+                        'Health Sciences / Healthcare', 
+                        'Core Mathematics'
+                    ],
+                    datasets: [{
+                        label: 'Teaching Competency Focus (%)',
+                        data: [98, 96, 95, 92, 96, 90],
+                        backgroundColor: 'rgba(20, 184, 166, 0.25)',
+                        borderColor: '#0d9488',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#d97706',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#d97706'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#f1f5f9' },
+                            pointLabels: {
+                                font: { size: 10, family: "'Plus Jakarta Sans', sans-serif", weight: '600' },
+                                color: '#334155'
+                            },
+                            ticks: { display: false, stepSize: 20 },
+                            suggestedMin: 50,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '% Proficiency Focus';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initial fee calculation run
+            calculateFee();
+        });
+
+        // 2. Program Cards Filter Logic
+        function filterProgram(category) {
+            const cards = document.querySelectorAll('.prog-card');
+            const buttons = document.querySelectorAll('.prog-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-teal-700', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-700');
+                activeBtn.classList.add('bg-teal-700', 'text-white');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 3. Dynamic Fee Calculator Logic
+        function calculateFee() {
+            const level = document.getElementById('calc-level').value;
+            const mode = document.querySelector('input[name="calc-mode"]:checked').value;
+            const hours = parseInt(document.getElementById('calc-hours').value);
+            const type = document.querySelector('input[name="calc-type"]:checked').value;
+
+            document.getElementById('hours-display').innerText = `${hours} Hour${hours > 1 ? 's' : ''} / Week`;
+
+            // Base hourly rates (RM)
+            let baseRate = 45; // Default base
+
+            if (level === 'school_primary') baseRate = 35;
+            else if (level === 'school_secondary') baseRate = 45;
+            else if (level === 'asasi') baseRate = 60;
+            else if (level === 'degree') baseRate = 80;
+
+            // In-person / Tutor's House rate premium
+            if (mode === 'home') baseRate += 10;
+
+            // Small group discount rate
+            if (type === 'group') baseRate = Math.round(baseRate * 0.70);
+
+            // Total per month (4 weeks)
+            const totalMonthly = baseRate * hours * 4;
+
+            // Display update
+            document.getElementById('fee-amount').innerText = totalMonthly;
+
+            // Summary text updates
+            const levelText = {
+                'school_primary': 'Primary School (Science/Maths)',
+                'school_secondary': 'Secondary School (Science/Maths/Bio/Chem)',
+                'asasi': 'Foundation in Science / Pre-U',
+                'degree': 'Degree/Diploma Healthcare & Health Sciences'
+            }[level];
+
+            document.getElementById('summary-level').innerText = levelText;
+            document.getElementById('summary-mode').innerText = mode === 'online' ? '💻 Online Class' : '🏠 Tutor\'s House (KL)';
+            document.getElementById('summary-hours').innerText = `${hours} Hour${hours > 1 ? 's' : ''} / Week`;
+            document.getElementById('summary-type').innerText = type === 'personal' ? '👤 1-to-1 Individual' : '👥 Small Group';
+        }
+
+        // 4. Send Calculated Package to WhatsApp
+        function sendCalculatedWhatsApp() {
+            const level = document.getElementById('summary-level').innerText;
+            const mode = document.getElementById('summary-mode').innerText;
+            const hours = document.getElementById('summary-hours').innerText;
+            const type = document.getElementById('summary-type').innerText;
+            const amount = document.getElementById('fee-amount').innerText;
+
+            const message = `Hello Dr. Nurul Ain,%0A%0AI am interested in registering for tuition based on the website calculator estimate:%0A- *Academic Level:* ${encodeURIComponent(level)}%0A- *Class Mode:* ${encodeURIComponent(mode)}%0A- *Frequency:* ${encodeURIComponent(hours)}%0A- *Format:* ${encodeURIComponent(type)}%0A- *Estimated Fee:* RM${amount}/month%0A%0ACould you please advise on your available schedule?`;
+
+            window.open(`https://wa.me/60125219701?text=${message}`, '_blank');
+        }
+
+        // 5. Select Program From Grid
+        function selectForBooking(subjectName) {
+            document.getElementById('form-subject').value = subjectName;
+            const formSection = document.getElementById('registration');
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 6. Registration Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('form-name').value;
+            const grade = document.getElementById('form-grade').value;
+            const mode = document.getElementById('form-mode').value;
+            const subject = document.getElementById('form-subject').value;
+            const notes = document.getElementById('form-notes').value;
+
+            let msg = `Hello Dr. Nurul Ain,%0A%0AI would like to enquire / register for tuition classes:%0A- *Student/Parent Name:* ${encodeURIComponent(name)}%0A- *Level/Grade:* ${encodeURIComponent(grade)}%0A- *Preferred Mode:* ${encodeURIComponent(mode)}%0A- *Subject(s):* ${encodeURIComponent(subject)}`;
+
+            if (notes.trim() !== '') {
+                msg += `%0A- *Additional Notes:* ${encodeURIComponent(notes)}`;
+            }
+
+            window.open(`https://wa.me/60125219701?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
